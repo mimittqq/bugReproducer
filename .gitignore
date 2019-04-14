@@ -1,0 +1,13 @@
+.idea/
+node_modules/
+dist/
+npm-debug.log
+.history/
+.vscode/
+.DS_Store
+yarn-error.log
+build
+webpack/dll/
+config/local.*
+local_mark.md
+*.local.json

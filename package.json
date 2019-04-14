@@ -1,0 +1,28 @@
+{
+  "name": "bugreproducer",
+  "version": "1.0.0",
+  "description": "tool to reproduce bug in front end",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mimittqq/bugReproducer.git"
+  },
+  "keywords": [
+    "bug",
+    "track",
+    "reproduce"
+  ],
+  "author": "mimittqq <332990332@qq.com> (https://github.com/mimittqq)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mimittqq/bugReproducer/issues"
+  },
+  "homepage": "https://github.com/mimittqq/bugReproducer#readme",
+  "devDependencies": {
+    "jest": "^24.7.1",
+    "typescript": "^3.4.3"
+  }
+}
