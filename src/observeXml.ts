@@ -1,42 +1,32 @@
-import { RecordXmlFormat } from "../interfaces/Recorder";
-import { XmlRecorder } from "./XmlRecorder";
+import { observerXmlHook } from '../interfaces/observerXml';
 
-export function observeXml() {
+export function observeXml(hook:observerXmlHook) {
   const proto = XMLHttpRequest.prototype;
-  const { open, send, onreadystatechange, abort, setRequestHeader } = proto;
-  let xml_recorder:XmlRecorder | undefined;
-  let url = '';
-  let method = '';
+  const { open, send, onreadystatechange, abort } = proto;
+  const { onOpen, onSend, onResponse, onAbort } = hook;
 
   function _open(method:string, url:string) {
-    xml_recorder = new XmlRecorder(url, method);
+    onOpen(method, url);
     return open.apply(this, <any>arguments);
   }
 
   function _send(body?:Document | BodyInit | null) {
-    if (xml_recorder) {
-      xml_recorder.onSend(body);
-    }
+    onSend(body);
     return send.call(this, body);
   }
 
   function _abort() {
-    if (xml_recorder) {
-      xml_recorder.onAbort();
-    }
-    xml_recorder = undefined;
-    url = '';
-    method = '';
+    onAbort();
     return abort.apply(this);
   }
 
   function _onreadystatechange() {
     if (this.readyState === 4) {
-      if (xml_recorder) {
-        xml_recorder.onResponse(this.status, this.response)
-      }
+      onResponse(this.status, this.response);
     }
-
+    if (onreadystatechange) {
+      return onreadystatechange.apply(this, <any>arguments);
+    }
   }
 
   Object.assign(
@@ -45,7 +35,7 @@ export function observeXml() {
       open: _open,
       abort: _abort,
       send: _send,
-      onreadystatechange: _onreadystatechange,
+      onreadystatechange: onreadystatechange ? _onreadystatechange : onreadystatechange,
     }
   );
 }

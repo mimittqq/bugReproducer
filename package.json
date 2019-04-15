@@ -4,7 +4,7 @@
   "description": "tool to reproduce bug in front end",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,11 @@
   },
   "homepage": "https://github.com/mimittqq/bugReproducer#readme",
   "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
     "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.4.3"
   }
 }
