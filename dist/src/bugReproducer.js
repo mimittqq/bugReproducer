@@ -14,9 +14,7 @@ function bugReproducer(options) {
     if (types) {
         if (types.indexOf('click') !== -1) {
             observeClickEvent_1.observeClickEvent((className, innerText, nodeName, id) => {
-                recorder.add(`发生点击事件, 节点类型:${nodeName.toLowerCase()}, 
-            ${id ? `id:${id}` : ''}, ${className ? `class:${className}` : ''}, 
-            内容:${innerText ? innerText.substring(0, 10) : ''}`);
+                recorder.add(`发生点击事件, 节点类型:${nodeName.toLowerCase()}, ${id ? `id:${id}, ` : ''}${className ? `class:${className}, ` : ''}内容:${innerText ? innerText.substring(0, 10) : ''}`);
             });
         }
         if (types.indexOf('request') !== -1) {
@@ -40,8 +38,7 @@ function bugReproducer(options) {
             });
         }
     }
-    const btn = createDraggableButton_1.createDraggableButton(className, btn_text);
-    btn.addEventListener('click', () => {
+    const btn = createDraggableButton_1.createDraggableButton(className, btn_text, () => {
         recorder.print();
         if (callback) {
             callback(recorder.user_operations);

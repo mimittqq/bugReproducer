@@ -10,9 +10,10 @@ class Recorder {
         this.user_operations.splice(0, this.user_operations.length - this.max);
     }
     print() {
-        let i = this.user_operations.length;
-        while (i--) {
-            console.log(this.user_operations[i]);
+        let length = this.user_operations.length;
+        let i = 0;
+        while (i < length) {
+            console.log(this.user_operations[i++]);
         }
     }
 }

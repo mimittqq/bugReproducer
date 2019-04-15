@@ -16,7 +16,7 @@ class XmlRecorder {
     }
     onResponse(status, res_text) {
         const { url, method } = this;
-        this.recorder.add(`${method} ${url}得到响应, status:${status}, 响应体:${res_text}`);
+        this.recorder.add(`${method} ${url} 得到响应, status:${status}, 响应体:${res_text}`);
     }
 }
 exports.XmlRecorder = XmlRecorder;

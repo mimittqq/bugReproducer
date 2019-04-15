@@ -1,4 +1,3 @@
-import { default_options } from './defaultOptions';
 export class Recorder {
   user_operations:string[] = [];
   private max:number;
@@ -12,9 +11,10 @@ export class Recorder {
   }
 
   print() {
-    let i = this.user_operations.length;
-    while (i--) {
-      console.log(this.user_operations[i]);
+    let length = this.user_operations.length;
+    let i = 0
+    while (i < length) {
+      console.log(this.user_operations[i++]);
     }
   }
 }

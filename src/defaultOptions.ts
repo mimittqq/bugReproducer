@@ -1,6 +1,6 @@
 import { BugReproducerOptions } from '../interfaces/bugReproducer';
 
 export const default_options:BugReproducerOptions = {
-  record_num: 30,
+  record_num: 20,
   types: ['request', 'click']
 };
