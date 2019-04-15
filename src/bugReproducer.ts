@@ -29,7 +29,7 @@ export function bugReproducer(options:BugReproducerOptions) {
     if (types.indexOf('request') !== -1) {
       observeXml({
         onOpen: (method, url) => {
-          xml_recorder = new XmlRecorder(url, method);
+          xml_recorder = new XmlRecorder(url, method, recorder);
         },
         onSend: (body) => {
           if (xml_recorder) {
