@@ -9,12 +9,15 @@ const XmlRecorder_1 = require("./XmlRecorder");
 function bugReproducer(options) {
     const opt = Object.assign({}, defaultOptions_1.default_options, options);
     const recorder = new Recorder_1.Recorder(opt.record_num);
-    const { types, className, btn_text, callback } = opt;
+    const { types, classname, btn_text, callback, btn_left, btn_top } = opt;
     let xml_recorder;
     if (types) {
         if (types.indexOf('click') !== -1) {
             observeClickEvent_1.observeClickEvent((className, innerText, nodeName, id) => {
-                recorder.add(`发生点击事件, 节点类型:${nodeName.toLowerCase()}, ${id ? `id:${id}, ` : ''}${className ? `class:${className}, ` : ''}内容:${innerText ? innerText.substring(0, 10) : ''}`);
+                recorder.add({
+                    type: 'Click event',
+                    detail: `node_type:${nodeName.toLowerCase()}, ${id ? `id:${id}, ` : ''}${className ? `class:${className}, ` : ''}content:${innerText ? innerText.substring(0, 10) : ''}`
+                });
             });
         }
         if (types.indexOf('request') !== -1) {
@@ -38,12 +41,12 @@ function bugReproducer(options) {
             });
         }
     }
-    const btn = createDraggableButton_1.createDraggableButton(className, btn_text, () => {
+    const btn = createDraggableButton_1.createDraggableButton(classname, btn_text, () => {
         recorder.print();
         if (callback) {
             callback(recorder.user_operations);
         }
-    });
+    }, btn_top, btn_left);
     document.body.append(btn);
 }
 exports.bugReproducer = bugReproducer;

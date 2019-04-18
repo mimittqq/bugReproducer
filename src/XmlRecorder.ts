@@ -12,16 +12,25 @@ export class XmlRecorder {
   
   onSend(data?:Document | BodyInit | null) {
     const { url, method } = this;
-    this.recorder.add(`发送请求, url:${url}, method:${method}, body:${data}`)
+    this.recorder.add({
+      type: 'Send request',
+      detail: `url:${url}, method:${method}, body:${data}`,
+    });
   }
 
   onAbort() {
     const { url, method } = this;
-    this.recorder.add(`取消请求, url:${url}, method:${method}`);
+    this.recorder.add({
+      type: 'Cancel request',
+      detail: `url:${url}, method:${method}`,
+    });
   }
 
   onResponse(status:number, res_text:string) {
     const { url, method } = this;
-    this.recorder.add(`${method} ${url} 得到响应, status:${status}, 响应体:${res_text}`);
+    this.recorder.add({
+      type: 'Get response',
+      detail: `from ${method} ${url}, status:${status}, body:${res_text}`
+    });
   }
 }
